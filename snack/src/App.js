@@ -12,7 +12,7 @@ function App() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [snacks, setSnacks] = useState([]);
 	const [drinks, setDrinks] = useState([]);
-
+	const state = [snacks, setSnacks, drinks, setDrinks];
 	useEffect(() => {
 		async function getSnacks() {
 			let snacks = await SnackOrBoozeApi.getSnacks();
@@ -54,6 +54,7 @@ function App() {
 									items={snacks}
 									title="Snacks"
 									itemType="snacks"
+									state={state}
 								/>
 							}
 						/>
@@ -76,6 +77,7 @@ function App() {
 									items={drinks}
 									itemType="drinks"
 									title="drinks"
+									state={state}
 								/>
 							}
 						/>

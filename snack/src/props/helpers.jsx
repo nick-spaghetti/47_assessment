@@ -8,34 +8,29 @@ export const handleItemChange = (e, form, setForm) => {
 };
 
 export const handleItemSubmit = (
+	items,
 	e,
 	form,
 	setForm,
-	add,
 	navigate,
 	initialFormState,
-	itemType
+	state
+	// itemType
 ) => {
 	e.preventDefault();
-	const newItem = { ...form, itemType: form.itemType };
-	handleAddItem({ newItem, add });
+	const { drink, setDrinks, snacks, setSnacks } = state;
+	const itemType = items.itemType;
+	const newItem = { ...form, itemType };
+	handleAddItem(e, items, newItem, setDrinks, setSnacks);
 	setForm(initialFormState);
 	navigate(`/${newItem.itemType}s`);
-	console.log(newItem);
 };
 
-export const handleAddItem = (
-	newItem,
-	add,
-	snacks,
-	setSnacks,
-	drinks,
-	setDrinks
-) => {
+export const handleAddItem = (e, items, newItem, setDrinks, setSnacks) => {
+	e.preventDefault();
 	if (newItem.itemType === "snack") {
 		setSnacks((prevSnacks) => [...prevSnacks, newItem]);
 	} else if (newItem.itemType === "drink") {
 		setDrinks((prevDrinks) => [...prevDrinks, newItem]);
 	}
-	add(newItem);
 };

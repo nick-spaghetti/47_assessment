@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { handleItemChange, handleItemSubmit } from "./helpers";
+import { handleItemChange, handleItemSubmit, handleAddItem } from "./helpers";
 
-const NewItemForm = ({ add }) => {
+const NewItemForm = ({ items, itemType, submit, state }) => {
 	const initialFormState = {
 		itemName: "",
-		itemType: "drink",
+		itemType: itemType,
 		itemDesc: "",
 		itemRecipe: "",
 		itemServe: "",
@@ -13,18 +13,22 @@ const NewItemForm = ({ add }) => {
 
 	const [form, setForm] = useState(initialFormState);
 	console.log(form);
+	// const add = handleAddItem;
 	const navigate = useNavigate();
 
 	return (
 		<div>
 			<form
 				onSubmit={(e) =>
-					handleItemSubmit(
+					submit(
+						items,
+						e,
 						form,
 						setForm,
-						add,
+						// add,
 						navigate,
-						form.itemType
+						// form.itemType,
+						state
 					)
 				}>
 				<div>
@@ -37,17 +41,6 @@ const NewItemForm = ({ add }) => {
 						onChange={(e) => handleItemChange(e, form, setForm)}
 						value={form.itemName}
 					/>
-				</div>
-				<div>
-					<label htmlFor="itemType">Type</label>
-					<select
-						name="itemType"
-						id="itemType"
-						value={form.itemType}
-						onChange={(e) => handleItemChange(e, form, setForm)}>
-						<option value="drink">drink</option>
-						<option value="snack">snack</option>
-					</select>
 				</div>
 				<div>
 					<label htmlFor="itemDesc">Description</label>

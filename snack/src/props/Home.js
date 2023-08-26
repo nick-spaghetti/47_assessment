@@ -17,7 +17,7 @@ function Home() {
 					</CardBody>
 				</Card>
 			</section>
-			<NewItemForm add={handleAddItem} />
+			{/* <NewItemForm add={handleAddItem} /> */}
 		</>
 	);
 }
